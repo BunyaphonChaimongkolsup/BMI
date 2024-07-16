@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+     <style>
+        body {
+            background-color:rgb(255, 251, 193);
+        }
+
+        .calculatorBMI {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 35px rgb(216, 102, 8);
+            border-radius: 10px;
+        }
+
+        .calculatorBMI input {
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculatorBMI button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            background-color: rgb(255, 172, 62);
+            color: white;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .calculatorBMI button:hover {
+            background-color: rgb(255, 136, 0);
+        }
+
+        .calculatorBMI p {
+            margin-top: 10px;
+            font-size: 1rem;
+            text-align: center;
+        }
+     </style>
+</head>
+<body>
+    <div class="calculatorBMI">
+        <input type="number" id="weight" placeholder="Weight (Kg)">
+        <input type="number" id="height" placeholder="Height (Cm)">
+        <button onclick="calculateBMI()">Calculator BMI</button>
+        <p id="result"></p>
+        <p id="criteria"></p>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const WeightDOM = document.getElementById('weight');
+            const HeightDOM = document.getElementById('height');
+
+            const w = Number(WeightDOM.value);
+            const h = Number(HeightDOM.value);
+
+            const output = CalculateBMI(w, h);
+            document.getElementById('result').textContent = "Your BMI is " + output;
+
+            if (output < 18.5) {
+                document.getElementById('criteria').textContent = "You're underweight (Asian criteria)";
+            }
+            else if (output < 23) {
+                document.getElementById('criteria').textContent = "You're normal (Asian criteria)";
+            }
+            else if (output < 25) {
+                document.getElementById('criteria').textContent = "You're overweight (Asian criteria)";
+            }
+            else if (output < 30) {
+                document.getElementById('criteria').textContent = "You're obese (Asian criteria)";
+            }
+            else {
+                document.getElementById('criteria').textContent = "You're extremly obese (Asian criteria)";
+            }
+        }
+
+        function CalculateBMI(w, h) {
+            let result = 0;
+            let weight = w;
+            let height = h / 100;
+
+            result = weight / (height * height);
+            return result;
+        }
+    </script>
+</body>
+</html>
